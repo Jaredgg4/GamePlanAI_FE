@@ -1,0 +1,22 @@
+User Stories 
+1. As a user I should be able to store which players I want to bet on based on what the AI gives me.
+2. As a user I should be able to ask AI which players to bet on based on the games being played that night
+3. As a user I should be able to look at players stats
+4. As a user I should be able to see which games are being played that night
+5. As a user I should be able to see the upcoming games
+6. As a user I should be able to modify my parlays
+7. As a user I should be able to create parlays
+8. As a user I should be able to delete parlays
+9. As a user I should be able to calculate odds based on user stats I input
+10. As a user I should be able to create an account and log in
+
+
+DataBase Items
+1. User parlays(player, stats, games, won/loss/pending)
+2. User accounts(passwords, username, email, info)
+3. Player info
+4. Players stats
+5. Games info
+6. User info
+
+
