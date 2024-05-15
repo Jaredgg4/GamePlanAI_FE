@@ -20,7 +20,7 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <Title/>
         <Burger/>
-        <Card/>
+        <Card href='./gamesDisplay'/>
       </main>
     </>
   );
