@@ -16,7 +16,6 @@ else{
 export const fetchGameData = createAsyncThunk<any>('games/fetchGames', async () => {
     const response = await axios.get(`https://api-nba-v1.p.rapidapi.com/games`, {headers:{'X-RapidAPI-Key': '9cb20a1792mshcbc6b9ff38d3ba1p1afbb3jsn948186029981',
     'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'}, params:{date: today.toString()}})
-    console.log(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`)
     console.log(response.data);
     return response.data
 })

@@ -21,14 +21,14 @@ const DisplayGames: React.FC = () =>{
                     <div >
                     <ul>
                     {games.map((game) => (
-                        <div className={styles.gameCards}>
+                        <div className={styles.gameCards} key={game.id}>
                         
                             <div className={styles.cards}>
-                            <li key={game.id}>Home: {game.teams.home.name} VS. </li> 
-                            <li key={game.id}>Visitors: {game.teams.visitors.name}</li>
-                            <li key={game.id}>Score: {game.scores.home.points}(home) - {game.scores.visitors.points}(away)</li>
-                            <li key={game.id}>Current Period: {game.periods.current}</li>
-                            <li key={game.id}>Status: {game.status.long}</li>
+                            <li>Home: {game.teams.home.name} VS. </li> 
+                            <li>Visitors: {game.teams.visitors.name}</li>
+                            <li>Score: {game.scores.home.points}(home) - {game.scores.visitors.points}(away)</li>
+                            <li>Current Period: {game.periods.current}</li>
+                            <li>Status: {game.status.long}</li>
                             </div>
                         </div>
                     ))}
