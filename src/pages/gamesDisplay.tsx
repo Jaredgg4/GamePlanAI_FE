@@ -17,7 +17,7 @@ const DisplayGames: React.FC = () =>{
                         <p>Loading...</p>
                     ): status === 'failed' ? (
                         <p>Failed to fetch games</p>
-                    ): (
+                    ): games.length > 0 ?(
                     <div >
                     <ul>
                     {games.map((game) => (
@@ -34,8 +34,11 @@ const DisplayGames: React.FC = () =>{
                     ))}
                     </ul>
                     </div>
+                    ):(
+                        <h2>There are no scheduled games today</h2>
                     )}
                     <button onClick={() => dispatch(fetchGameData())}>Load Todays Games</button>
+                    
         </div>
         </main>
     )
