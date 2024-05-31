@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Games from './model/games'
 
 const date = new Date();
 
@@ -14,24 +15,32 @@ else{
 }
 
 export const fetchGameData = createAsyncThunk<any>('games/fetchGames', async () => {
-    const response = await axios.get(`https://api-nba-v1.p.rapidapi.com/games`, {headers:{'X-RapidAPI-Key': '9cb20a1792mshcbc6b9ff38d3ba1p1afbb3jsn948186029981',
+    const response = await axios.get(`https://api-nba-v1.p.rapidapi.com/games`, {headers:{'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
     'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'}, params:{date: today.toString()}})
     console.log(`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`)
     console.log(response.data);
     return response.data
 })
 
-interface Games  {
-    entity: string,
+export const fetchGameById = createAsyncThunk<any, any>('games/FetchGameId', async (gameId: number) => {
+    const response = await axios.get(`https://api-nba-v1.p.rapidapi.com/games`, {headers:{'X-RapidAPI-Key': process.env.NEXT_PUBLIC_RAPID_API_KEY,
+    'X-RapidAPI-Host': 'api-nba-v1.p.rapidapi.com'}, params:{id: gameId}})
+    console.log(response.data);
+    return response.data;
+})
+
+
+interface GamesState  {
     loading: string,
     error: string | undefined,
     list: any[],
+    list2: any[]
 }
 
 
 const userSlice = createSlice({
     name: 'games',
-    initialState: { entity: '', loading: 'idle', error: '', list: []} as Games,
+    initialState: { entity: '', loading: 'idle', error: '', list: [], list2: []} as GamesState,
     reducers: {
     },
     extraReducers: (builder) =>{
@@ -43,6 +52,17 @@ const userSlice = createSlice({
             state.list = action.payload.response;
         });
         builder.addCase(fetchGameData.rejected, (state, action) => {
+            state.loading = 'failed';
+            state.error = action.error.message;
+        });
+        builder.addCase(fetchGameById.pending, (state, action) => {
+            state.loading = 'loading';
+        });
+        builder.addCase(fetchGameById.fulfilled, (state, action) => {
+            state.loading = 'succeeded';
+            state.list2 = action.payload.response;
+        });
+        builder.addCase(fetchGameById.rejected, (state, action) => {
             state.loading = 'failed';
             state.error = action.error.message;
         });

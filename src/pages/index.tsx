@@ -5,10 +5,18 @@ import styles from "@/styles/Home.module.css";
 import Title from '../components/Title';
 import Card from '../components/Card';
 import Burger from '../components/Burger';
+import AccountButton from "@/components/AccountButton";
+import { useSearchParams } from "next/navigation";
+import { ProfilePic } from "@/components/profilepic";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const signedInParams = useSearchParams();
+  const isSignedIn = signedInParams?.get('signedIn')
+
+  const idParams = useSearchParams();
+  const id = idParams?.get('userid')
   return (
     <>
       <Head>
@@ -22,8 +30,13 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Title/>
+        {isSignedIn ? (
+          <ProfilePic href="../assets/coolracoon.jpeg"/>
+        ): (
+          <AccountButton href='./createUser'/>
+        )}
         <Burger/>
-        <Card href='./gamesDisplay' href2='./aiChat'/>
+        <Card href='./gamesDisplay' href2='./aiChat' href3={'/parlaysDisplay?userid=' + id}/>
       </main>
     </>
   );

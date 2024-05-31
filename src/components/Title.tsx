@@ -1,4 +1,4 @@
-import styles from './Title.module.css';
+import styles from './styles/Title.module.css';
 
 const Title: React.FC = () => {
     return(

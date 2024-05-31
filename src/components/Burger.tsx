@@ -1,4 +1,4 @@
-import styles from './Burger.module.css';
+import styles from './styles/Burger.module.css';
 
 const Burger: React.FC = () => {
     return(
